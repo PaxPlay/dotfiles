@@ -1,4 +1,3 @@
-" Plugins
 call plug#begin()
 
 Plug 'tpope/vim-sensible'
@@ -8,20 +7,24 @@ Plug 'nvim-tree/nvim-web-devicons'
 Plug 'noib3/nvim-cokeline'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'folke/tokyonight.nvim'
+Plug 'tikhomirov/vim-glsl'
+Plug 'nvim-tree/nvim-tree.lua'
 
 call plug#end()
 
-" I use spaces over tabs
+au BufRead,BufNewFile *.hip set ft=cpp
+
 set shiftwidth=4 smarttab expandtab
 
 set termguicolors
 lua require('cokeline').setup()
 colorscheme tokyonight-night
 
-set relativenumber
+lua require("nvim-tree").setup()
 
-au BufNewFile,BufRead *.hip set ft=cpp
+set relativenumber number
 
+" ========================= coc.nvim configuration =========================
 " https://raw.githubusercontent.com/neoclide/coc.nvim/master/doc/coc-example-config.vim
 
 " May need for Vim (not Neovim) since coc.nvim calculates byte offset by count
@@ -184,3 +187,4 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
