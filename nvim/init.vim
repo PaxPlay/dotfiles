@@ -50,6 +50,8 @@ Plug 'Yggdroot/indentLine'
 Plug 'editor-bootstrap/vim-bootstrap-updater'
 Plug 'tpope/vim-rhubarb' " required by fugitive to :GBrowse
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-orgmode/orgmode'
 
 
 if isdirectory('/usr/local/opt/fzf')
@@ -69,8 +71,8 @@ Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 
 "" Snippets
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+" Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets'
 
 "*****************************************************************************
 "" Custom bundles
@@ -140,7 +142,7 @@ set shiftwidth=4
 set expandtab
 
 "" Map leader to ,
-let mapleader=','
+let mapleader='\'
 
 "" Enable hidden buffers
 set hidden
@@ -391,10 +393,10 @@ nnoremap <silent> <leader>e :FZF -m<CR>
 nmap <leader>y :History:<CR>
 
 " snippets
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<c-b>"
-let g:UltiSnipsEditSplit="vertical"
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<tab>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+" let g:UltiSnipsEditSplit="vertical"
 
 " ale
 let g:ale_linters = {}
@@ -549,3 +551,27 @@ else
   let g:airline_symbols.readonly = ''
   let g:airline_symbols.linenr = ''
 endif
+
+" orgmode
+lua << EOF
+
+-- Load custom tree-sitter grammar for org filetype
+require('orgmode').setup_ts_grammar()
+
+-- Tree-sitter configuration
+require'nvim-treesitter.configs'.setup {
+  -- If TS highlights are not enabled at all, or disabled via `disable` prop, highlighting will fallback to default Vim syntax highlighting
+  highlight = {
+    enable = true,
+    disable = {'org'}, -- Remove this to use TS highlighter for some of the highlights (Experimental)
+    additional_vim_regex_highlighting = {'org'}, -- Required since TS highlighter doesn't support all syntax features (conceal)
+  },
+  ensure_installed = {'org'}, -- Or run :TSUpdate org
+}
+
+require('orgmode').setup({
+  org_agenda_files = {'~/Documents/org/*', '~/my-orgs/**/*'},
+  org_default_notes_file = '~/Documents/org/refile.org',
+})
+EOF
+
