@@ -35,3 +35,4 @@ require("lazy").setup({
         enabled = true
     }
 })
+

@@ -23,13 +23,12 @@ require('lualine').setup({
     }
 })
 
-lsp = require("lspconfig")
-lsp.clangd.setup({
+vim.lsp.config("clangd", {
     cmd = { "clangd", "--background-index" },
     filetypes = { "c", "cpp", "objc", "objcpp" },
-    root_dir = lsp.util.root_pattern("compile_commands.json", "compile_flags.txt", ".git", ".clangd", ".clang-format", ".clang-tidy"),
+    root_dir = require("lspconfig").util.root_pattern("compile_commands.json", "compile_flags.txt", ".git", ".clangd", ".clang-format", ".clang-tidy"),
 })
-lsp.rust_analyzer.setup({
+vim.lsp.config("rust_analyzer", {
     settings = {
         ["rust-analyzer"] = {
             checkOnSave = {
@@ -38,7 +37,7 @@ lsp.rust_analyzer.setup({
         }
     }
 })
-lsp.pyright.setup({
+vim.lsp.config("pyright", {
     settings = {
         python = {
             analysis = {
