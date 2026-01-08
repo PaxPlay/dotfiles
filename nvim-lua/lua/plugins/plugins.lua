@@ -1,4 +1,4 @@
-return {"junegunn/fzf", "junegunn/fzf.vim", "neovim/nvim-lspconfig", {
+return {"junegunn/fzf", "junegunn/fzf.vim", "neovim/nvim-lspconfig", "stevearc/overseer.nvim", {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,

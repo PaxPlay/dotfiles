@@ -61,6 +61,7 @@ vim.opt.termguicolors = true
 vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>f", "<cmd>Files<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>b", "<cmd>Buffers<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>o", "<cmd>OverseerToggle<CR>", { noremap = true, silent = true })
 
 
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -74,3 +75,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     })
   end
 })
+
+require('overseer').setup()
+
