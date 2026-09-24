@@ -103,7 +103,15 @@ vim.lsp.config("pyright", {
     }
 })
 
-vim.lsp.enable({ "rust_analyzer", "pyright" })
+vim.lsp.config("ruff", {
+    init_options = {
+        settings = {
+            lineLength = 88
+        }
+    }
+})
+
+vim.lsp.enable({ "rust_analyzer", "pyright", "ruff" })
 
 vim.wo.number = true
 vim.wo.relativenumber = true
@@ -115,8 +123,10 @@ vim.opt.encoding = "utf-8"
 vim.opt.termguicolors = true
 
 vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>f", "<cmd>Files<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>b", "<cmd>Buffers<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>f", "<cmd>Telescope find_files<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>b", "<cmd>Telescope buffers<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>s", "<cmd>Telescope aerial<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>Telescope live_grep<CR>", { noremap = true, silent = true })
 
 
 vim.api.nvim_create_autocmd("LspAttach", {
