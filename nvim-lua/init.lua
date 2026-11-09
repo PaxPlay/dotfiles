@@ -24,7 +24,7 @@ require('lualine').setup({
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "c", "cpp", "objc", "objcpp" },
+    pattern = { "c", "cpp", "objc", "objcpp", "cuda" },
     callback = function(ev)
         local fname = vim.api.nvim_buf_get_name(ev.buf)
         if fname == "" then return end
@@ -111,7 +111,7 @@ vim.lsp.config("ruff", {
     }
 })
 
-vim.lsp.enable({ "rust_analyzer", "pyright", "ruff" })
+vim.lsp.enable({ "rust_analyzer", "pyright", "ruff", "glsl_analyzer" })
 
 vim.wo.number = true
 vim.wo.relativenumber = true
